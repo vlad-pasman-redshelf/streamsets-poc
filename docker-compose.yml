@@ -1,0 +1,30 @@
+# Use postgres/example user/password credentials
+version: '3.1'
+
+services:
+
+  sdc:
+    image: streamsets/datacollector
+    hostname: sdc
+    restart: on-failure
+    depends_on:
+      - pg-stream
+    ports:
+      - 18630:18630
+    volumes:
+      - ./sdc-data:/data
+      - ./dpm.properties:/etc/sdc/dpm.properties:ro
+      - ./application-token.txt:/etc/sdc/application-token.txt
+      - ./sdc.properties:/etc/sdc/sdc.properties
+
+  pg-stream:
+    image: postgres
+    restart: always
+    hostname: pg-stream
+    environment:
+      POSTGRES_USER: vlad
+      POSTGRES_PASSWORD: test
+    ports:
+      - 5432:5432
+    volumes:
+      - ./postgres-data:/var/lib/postgresql
