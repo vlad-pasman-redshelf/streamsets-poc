@@ -5,7 +5,7 @@ import pdb
 # Replace the argument values according to your setup
 control_hub = ControlHub(server_url='https://cloud.streamsets.com',
                          username='admin@redshelf.com',
-                         password='36!S0phie36!')
+                         password='[secret]')
 
 DataCollector.VERIFY_SSL_CERTIFICATES = False
 data_collector = DataCollector('https://localhost:18630', control_hub=control_hub)
